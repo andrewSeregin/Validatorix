@@ -21,6 +21,10 @@ struct ValidationPriority {
             let validationResult = lhs.validationResult && rhs().validationResult
             return ValidationPriority(validationResult: validationResult)
     }
+    
+    var isValid: Bool {
+        return self.validationResult.isValid
+    }
 }
 
 extension ValidationPriority: CustomStringConvertible {

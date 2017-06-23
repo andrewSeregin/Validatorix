@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Validatorix
+//  TextFieldTest
 //
-//  Created by Andrew Seregin on 6/19/17.
+//  Created by Andrew Seregin on 6/21/17.
 //  Copyright © 2017 Andrew Seregin. All rights reserved.
 //
 

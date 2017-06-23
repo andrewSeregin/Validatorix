@@ -49,4 +49,3 @@ extension UITextField: ValidationValue {
 extension UISlider: ValidationValue {
     var validationValue: Float { return value }
 }
-

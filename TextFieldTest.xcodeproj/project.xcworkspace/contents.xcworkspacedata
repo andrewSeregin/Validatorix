@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Validatorix.xcodeproj">
+      location = "self:TextFieldTest.xcodeproj">
    </FileRef>
 </Workspace>

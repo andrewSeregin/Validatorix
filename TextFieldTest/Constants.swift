@@ -16,7 +16,6 @@ enum Constants {
         enum ErrorDescription {
             static let base = "Does not satisfy the rule."
         }
-        
     }
     
     enum RegExp {
