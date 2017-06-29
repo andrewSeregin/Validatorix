@@ -21,25 +21,18 @@ class NewViewController: UIViewController {
         super.viewDidLoad()
         
         let rule = AnyRule { $0 == "Andrew" }
-        
         wraper = UIKitWrapper(element: textView,
-                              validation: { self.textView.validate(using: rule) },
-                              validationHandler: { print($0) })
+                              validation: Validatorix(value: textView, rule: rule)) {
+                                print($0)
+        }
         wraper?.validateOnChange(enabled: true)
-        
         
         let ruleTwo = AnyRule { $0 == "A" }
         secondWraper = UIKitWrapper(element: secondTextView,
-                                    validation: { self.secondTextView.validate(using: ruleTwo) },
-                                    validationHandler: { print($0) })
+                                    validation: Validatorix(value: secondTextView, rule: ruleTwo)) {
+                                        print($0)
+        }
         secondWraper?.validateOnChange(enabled: true)
+        
     }
-}
-
-
-struct Container<T: ValidationValue> {
-    
-    let min: T
-    let max: T
-    
 }

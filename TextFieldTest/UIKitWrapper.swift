@@ -9,16 +9,14 @@
 import UIKit
 
 class UIKitWrapper {
-    
-    typealias Validation = () -> ValidationPriority
     typealias ValidationHandler = (ValidationPriority) -> ()
     
     var element: EventProvider
-    let validation: Validation
+    let validation: Validated
     let validationHandler: ValidationHandler
     
     init(element: EventProvider,
-         validation: @escaping Validation,
+         validation: Validated,
          validationHandler: @escaping ValidationHandler) {
         self.element = element
         self.validation = validation
@@ -32,7 +30,8 @@ class UIKitWrapper {
 
 extension UIKitWrapper {
     @objc func validate() {
-        validationHandler(validation())
+        let result = validation.validate()
+        validationHandler(result)
     }
 }
 
