@@ -52,6 +52,7 @@ extension EventProvider where Self: UIControl {
 
 extension UITextField: EventProvider {}
 extension UISlider: EventProvider {}
+extension UISwitch: EventProvider {}
 
 extension EventProvider where Self: UITextView {
     func onEditingChanged(enabled: Bool, for target: Any, action: Selector) {
@@ -65,4 +66,4 @@ extension EventProvider where Self: UITextView {
 
 extension UITextView: EventProvider {}
 
-extension UISwitch: EventProvider {}
+

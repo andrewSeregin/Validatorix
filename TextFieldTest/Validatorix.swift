@@ -8,11 +8,13 @@
 
 struct Validatorix {
     
-    static func validate<Value: ValidationValue, R: Rule>(input value: Value, using rule: R) -> ValidationPriority where R.Value == Value.Value {
+    static func validate<Value: ValidationValue, R: Rule>(input value: Value,
+                                                          using rule: R) -> ValidationPriority where R.Value == Value.Value {
         return value.validate(using: rule)
     }
     
-    static func validate<Value: ValidationValue>(input value: Value, using scopeOfRule: ScopeOfRules<Value.Value>) -> ValidationPriority {
+    static func validate<Value: ValidationValue>(input value: Value,
+                                                 using scopeOfRule: ScopeOfRules<Value.Value>) -> ValidationPriority {
         return value.validate(using: scopeOfRule)
     }
     

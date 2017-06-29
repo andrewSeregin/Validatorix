@@ -8,34 +8,42 @@
 
 import Foundation
 
+struct RuleDescription<Value> {
+    var priority: Bool
+    var errorDescription: ValidationResult.ErrorDescription
+    var condition: (Value) -> Bool
+}
+
 protocol Rule {
     associatedtype Value
-    var prioruty: Bool { get }
-    var errorDescription: ValidationResult.ErrorDescription { get }
-    var condition: (Value) -> Bool { get }
+    var description: RuleDescription<Value> { get }
     
     func validation(for value: Value) -> ValidationPriority
 }
 
+extension Rule {
+    func validation(for value: Value) -> ValidationPriority {
+        let validationResult: ValidationResult = description.condition(value) ? .valid : .invalid(description.errorDescription)
+        return ValidationPriority(isPrioruty: description.priority,
+                                  validationResult: validationResult)
+    }
+}
+
 struct AnyRule<Value>: Rule {
-    let prioruty: Bool
-    let errorDescription: ValidationResult.ErrorDescription
-    let condition: (Value) -> Bool
-    
-    init(prioruty: Bool = true,
+    let description: RuleDescription<Value>
+}
+
+extension AnyRule {
+    init(priority: Bool = true,
          errorDescription: ValidationResult.ErrorDescription = Constants.ValidationResult.ErrorDescription.base,
          condition: @escaping (Value) -> Bool) {
-        self.prioruty = prioruty
-        self.errorDescription = errorDescription
-        self.condition = condition
+        let description = RuleDescription(priority: priority,
+                                          errorDescription: errorDescription,
+                                          condition: condition)
+        self.init(description: description)
     }
     
     init<R: Rule>(converted rule: R) where R.Value == Value {
-        self.init(prioruty: rule.prioruty, errorDescription: rule.errorDescription, condition: rule.condition)
-    }
-    
-    func validation(for value: Value) -> ValidationPriority {
-        let validationResult: ValidationResult = condition(value) ? .valid : .invalid(errorDescription)
-        return ValidationPriority(isPrioruty: prioruty, validationResult: validationResult)
+        self.init(description: rule.description)
     }
 }

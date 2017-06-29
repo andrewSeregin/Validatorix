@@ -9,12 +9,13 @@
 import Foundation
 
 enum Constants {
-
+    
     enum ValidationResult {
         static let valid = "Valid"
         
         enum ErrorDescription {
             static let base = "Does not satisfy the rule."
+            static let empty = "Value can not be empty"
         }
     }
     
@@ -22,3 +23,4 @@ enum Constants {
         static let predicateFormat = "SELF MATCHES %@"
     }
 }
+

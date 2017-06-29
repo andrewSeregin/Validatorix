@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let r = AnyRule { $0 == "Andrew" }
+        /*let r = AnyRule { $0 == "Andrew" }
         print(textField.validate(using: r))
         
         field = UIKitWrapper(element: textField,
@@ -42,13 +42,29 @@ class ViewController: UIViewController {
                                 validationHandler: {
                                     self.field?.validateOnChange(enabled: !$0.isValid)
                                 })
-        newField?.validateOnChange(enabled: true)
+        newField?.validateOnChange(enabled: true)*/
         
+        //let value: String? = nil
         
+        let nsString: NSString? = nil
+        print(nsString.isNotNil)
+        let nsStringRule: AnyRule<NSString> = AnyRule { $0 == "Andrew" }
+        
+        let result = nsString.validate(using: nsStringRule)
+        print(result)
+        
+        /*print(value.validate(using: r).description)*/
+        
+        let new: New? = New(one: "Andrew")
+        let rule: AnyRule<New> = AnyRule{ $0.one == "Andrew" }
+        
+        let res = new.validate(using: rule)
+        print(res)
         
         
     }
-
-    
 }
 
+struct New {
+    let one: String
+}

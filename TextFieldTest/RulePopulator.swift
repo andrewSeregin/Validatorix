@@ -30,19 +30,18 @@ enum RulePopulator {
         static func makeGreaterAndSmallerThenRule<Value: Comparable>(minimum start: Value, maximum finish: Value) -> AnyRule<Value> {
             let greaterThenRule = RulePopulator.Comparisons.makeGreaterThenRule(value: start)
             let smallerThenRule = RulePopulator.Comparisons.makeSmallerThenRule(value: finish)
-            return AnyRule { greaterThenRule.condition($0) && smallerThenRule.condition($0) }
+            return AnyRule { greaterThenRule.description.condition($0) && smallerThenRule.description.condition($0) }
         }
         
         static func makeGreaterOrEqualAndSmallerOrEqualThenRule<Value: Comparable>(minimum start: Value, maximum finish: Value) -> AnyRule<Value> {
             let greaterOrEqualThenRule = RulePopulator.Comparisons.makeGreaterOrEqualThanRule(value: start)
             let smallerOrEqualThenRule = RulePopulator.Comparisons.makeSmallerOrEqualThanRule(value: finish)
-            return AnyRule { greaterOrEqualThenRule.condition($0) && smallerOrEqualThenRule.condition($0) }
+            return AnyRule { greaterOrEqualThenRule.description.condition($0) && smallerOrEqualThenRule.description.condition($0) }
         }
     }
 
     
     enum RegExp {
-        
         static func makeCustomRule<Pattern: CustomStringConvertible>(using pattern: Pattern) -> AnyRule<String> {
             let predicate = NSPredicate(format: Constants.RegExp.predicateFormat, pattern.description)
             return AnyRule { predicate.evaluate(with: $0) }
