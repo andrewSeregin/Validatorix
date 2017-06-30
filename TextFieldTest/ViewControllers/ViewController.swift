@@ -78,8 +78,6 @@ extension ViewController: ValidationDelegate {
     func onInvalid(using description: ValidationResult.ErrorDescription) {
         print(description)
     }
-    
-    
 }
 
 struct New {

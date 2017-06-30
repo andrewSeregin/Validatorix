@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -104,27 +104,49 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DSp-lI-lb8">
-                                <rect key="frame" x="16" y="254" width="343" height="213"/>
+                                <rect key="frame" x="16" y="337" width="343" height="230"/>
                                 <color key="backgroundColor" red="1" green="0.42364055252812516" blue="0.35331436733975352" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BS2-rO-9fV">
+                                <rect key="frame" x="16" y="6" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WF6-0h-ddY">
+                                <rect key="frame" x="16" y="270" width="46" height="28"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="gev-Po-fQv" eventType="touchUpInside" id="Cbh-4n-Ruz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WF6-0h-ddY" firstAttribute="leading" secondItem="2fE-2O-tfn" secondAttribute="leading" id="8QD-0h-HEW"/>
+                            <constraint firstAttribute="trailing" secondItem="BS2-rO-9fV" secondAttribute="trailing" constant="16" id="A2j-o6-ZUE"/>
+                            <constraint firstItem="BS2-rO-9fV" firstAttribute="leading" secondItem="RjK-Jn-2rq" secondAttribute="leading" constant="16" id="DHE-Bp-8WC"/>
                             <constraint firstItem="2fE-2O-tfn" firstAttribute="top" secondItem="m2n-si-Chq" secondAttribute="bottom" constant="8" id="Fxv-eu-Ypv"/>
                             <constraint firstItem="DSp-lI-lb8" firstAttribute="leading" secondItem="RjK-Jn-2rq" secondAttribute="leadingMargin" id="Htd-mz-paE"/>
-                            <constraint firstItem="bUX-Vx-C3s" firstAttribute="top" secondItem="DSp-lI-lb8" secondAttribute="bottom" constant="200" id="Uyq-Rq-n2p"/>
+                            <constraint firstItem="2fE-2O-tfn" firstAttribute="top" secondItem="BS2-rO-9fV" secondAttribute="bottom" constant="1" id="Uff-eu-1fQ"/>
+                            <constraint firstItem="bUX-Vx-C3s" firstAttribute="top" secondItem="DSp-lI-lb8" secondAttribute="bottom" constant="100" id="Uyq-Rq-n2p"/>
                             <constraint firstItem="DSp-lI-lb8" firstAttribute="trailing" secondItem="RjK-Jn-2rq" secondAttribute="trailingMargin" id="Xaf-RK-E2A"/>
                             <constraint firstItem="2fE-2O-tfn" firstAttribute="leading" secondItem="RjK-Jn-2rq" secondAttribute="leadingMargin" id="bOO-YJ-NO9"/>
-                            <constraint firstItem="DSp-lI-lb8" firstAttribute="top" secondItem="2fE-2O-tfn" secondAttribute="bottom" constant="17" id="gmR-kN-RZV"/>
+                            <constraint firstItem="DSp-lI-lb8" firstAttribute="top" secondItem="WF6-0h-ddY" secondAttribute="bottom" constant="39" id="gKM-Td-rSh"/>
+                            <constraint firstItem="DSp-lI-lb8" firstAttribute="top" secondItem="2fE-2O-tfn" secondAttribute="bottom" constant="100" id="gmR-kN-RZV"/>
                             <constraint firstItem="2fE-2O-tfn" firstAttribute="trailing" secondItem="RjK-Jn-2rq" secondAttribute="trailingMargin" id="mAv-Mu-4Of"/>
+                            <constraint firstItem="WF6-0h-ddY" firstAttribute="top" secondItem="2fE-2O-tfn" secondAttribute="bottom" constant="33" id="nuY-ws-F3I"/>
+                            <constraint firstItem="BS2-rO-9fV" firstAttribute="centerX" secondItem="2fE-2O-tfn" secondAttribute="centerX" id="sGU-Zs-aka"/>
                             <constraint firstItem="bUX-Vx-C3s" firstAttribute="top" secondItem="2fE-2O-tfn" secondAttribute="bottom" constant="430" id="svV-0T-s2U"/>
+                            <constraint firstItem="BS2-rO-9fV" firstAttribute="top" secondItem="RjK-Jn-2rq" secondAttribute="top" constant="6" id="uYj-rO-OcO"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="secondTextView" destination="DSp-lI-lb8" id="5od-vQ-msP"/>
                         <outlet property="textView" destination="2fE-2O-tfn" id="7Uk-o7-WWJ"/>
+                        <outlet property="validationLabel" destination="BS2-rO-9fV" id="68m-5x-ox6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgF-KD-bEv" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -45,6 +45,28 @@ class ValidationContainer {
     func removeAll() {
         container.removeAll()
     }
+    
+    var isEmpty: Bool {
+        return container.isEmpty
+    }
+    
+    func validateAll() {
+        var validationsErrors: [ValidationPriority] = []
+        container.values.forEach {
+            let result = $0.validation.validate()
+            $0.validationHandler(result)
+            if !result.isValid {
+                validationsErrors.append(result)
+            }
+        }
+        guard !validationsErrors.isEmpty else {
+            return onValid()
+        }
+        let averagedError = validationsErrors
+                                .reduce(ValidationPriority()) { $0 && $1 }
+        onInvalid(averagedError.description)
+    }
+    
 }
 
 protocol ValidationDelegate {
