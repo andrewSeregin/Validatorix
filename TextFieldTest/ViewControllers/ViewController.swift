@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     var newField: UIKitWrapper?
     var sliderWraper: UIKitWrapper?
     
+    var container: ValidationContainer?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +48,7 @@ class ViewController: UIViewController {
         
         //let value: String? = nil
         
-        let nsString: NSString? = nil
+        /*let nsString: NSString? = nil
         print(nsString.isNotNil)
         let nsStringRule: AnyRule<NSString> = AnyRule { $0 == "Andrew" }
         
@@ -59,10 +61,25 @@ class ViewController: UIViewController {
         let rule: AnyRule<New> = AnyRule{ $0.one == "Andrew" }
         
         let res = new.validate(using: rule)
-        print(res)
+        print(res)*/
         
-        
+        container = ValidationContainer(delegate: self)
+        container?.append(wrappedElement: field)
+        container?.append(wrappedElement: newField)
+        container?.append(wrappedElement: sliderWraper)
     }
+}
+
+extension ViewController: ValidationDelegate {
+    func onValid() {
+        print("Valid")
+    }
+    
+    func onInvalid(using description: ValidationResult.ErrorDescription) {
+        print(description)
+    }
+    
+    
 }
 
 struct New {

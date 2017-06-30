@@ -16,7 +16,7 @@ struct Validatorix<Value: ValidationValue>: Validated {
     let scopeOfRule: ScopeOfRules<Value.Value>
     
     func validate() -> ValidationPriority {
-        return value.validate(using: scopeOfRule)
+        return Validatorix.validate(input: value, using: scopeOfRule)
     }
     
     static func validate<Value: ValidationValue, R: Rule>(input value: Value,

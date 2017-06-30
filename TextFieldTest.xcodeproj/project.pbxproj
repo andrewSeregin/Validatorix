@@ -22,6 +22,7 @@
 		B18D3EDD1EFAAC9D00F56E6F /* ScopeOfRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EDC1EFAAC9D00F56E6F /* ScopeOfRules.swift */; };
 		B18D3EE11EFAACF300F56E6F /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EDF1EFAACF300F56E6F /* NewViewController.swift */; };
 		B18D3EE21EFAACF300F56E6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EE01EFAACF300F56E6F /* ViewController.swift */; };
+		B1C98D841F060CF7006C00C2 /* ValidationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C98D831F060CF7006C00C2 /* ValidationContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		B18D3EDC1EFAAC9D00F56E6F /* ScopeOfRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeOfRules.swift; sourceTree = "<group>"; };
 		B18D3EDF1EFAACF300F56E6F /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		B18D3EE01EFAACF300F56E6F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B1C98D831F060CF7006C00C2 /* ValidationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				B18D3ECA1EFA67D200F56E6F /* ValidationValue.swift */,
 				B18D3EC81EFA67CB00F56E6F /* Validatorix.swift */,
 				B18D3EDC1EFAAC9D00F56E6F /* ScopeOfRules.swift */,
+				B1C98D831F060CF7006C00C2 /* ValidationContainer.swift */,
 			);
 			path = TextFieldTest;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				B18D3EDD1EFAAC9D00F56E6F /* ScopeOfRules.swift in Sources */,
 				B18D3EC91EFA67CB00F56E6F /* Validatorix.swift in Sources */,
 				B18D3ED91EFA69DE00F56E6F /* UIKitWrapper.swift in Sources */,
+				B1C98D841F060CF7006C00C2 /* ValidationContainer.swift in Sources */,
 				B18D3EE11EFAACF300F56E6F /* NewViewController.swift in Sources */,
 				B18D3EE21EFAACF300F56E6F /* ViewController.swift in Sources */,
 				B18D3ED31EFA67EC00F56E6F /* ValidationResult.swift in Sources */,

@@ -16,7 +16,6 @@ class NewViewController: UIViewController {
     @IBOutlet weak var secondTextView: UITextView!
     var secondWraper: UIKitWrapper?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +32,8 @@ class NewViewController: UIViewController {
                                         print($0)
         }
         secondWraper?.validateOnChange(enabled: true)
+        
+        print(textView.validationValue)
         
     }
 }

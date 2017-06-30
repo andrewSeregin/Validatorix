@@ -9,7 +9,7 @@
 import UIKit
 
 class UIKitWrapper {
-    typealias ValidationHandler = (ValidationPriority) -> ()
+    typealias ValidationHandler = (ValidationPriority) -> Void
     
     var element: EventProvider
     let validation: Validated
