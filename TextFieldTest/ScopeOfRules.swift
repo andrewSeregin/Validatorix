@@ -6,12 +6,6 @@
 //  Copyright © 2017 Andrew Seregin. All rights reserved.
 //
 
-extension Sequence where Iterator.Element : Rule {
-    func validate(value: Self.Element.Value) -> [ValidationPriority] {
-        return self.flatMap { $0.validation(for: value) }
-    }
-}
-
 struct ScopeOfRules<Value> {
     fileprivate var _rules: [AnyRule<Value>] = []
     
@@ -39,3 +33,8 @@ extension ScopeOfRules {
     }
 }
 
+extension Sequence where Iterator.Element : Rule {
+    func validate(value: Self.Element.Value) -> [ValidationPriority] {
+        return self.flatMap { $0.validation(for: value) }
+    }
+}
