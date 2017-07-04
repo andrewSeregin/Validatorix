@@ -29,8 +29,8 @@ extension ValidationValue {
     func validate(using scopeOfRule: ScopeOfRules<Self.Value>) -> ValidationPriority {
         if isNotNil {
             return scopeOfRule
-                .validate(value: self.validationValue)
-                .reduce(ValidationPriority()) { $0 && $1 }
+                    .validate(value: self.validationValue)
+                    .reduce(ValidationPriority()) { $0 && $1 }
         }
         let validationError = Constants.ValidationResult.ErrorDescription.empty
         return ValidationPriority(validationResult: .invalid(validationError))

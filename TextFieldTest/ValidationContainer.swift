@@ -6,13 +6,20 @@
 //  Copyright © 2017 Andrew Seregin. All rights reserved.
 //
 
-import Foundation
+protocol ValidationDelegate {
+    func onValid()
+    func onInvalid(using description: ValidationResult.ErrorDescription)
+}
 
 class ValidationContainer {
     
     private var container: [ObjectIdentifier: ValidationElement] = [:]
     let onValid: () -> Void
     let onInvalid: (ValidationResult.ErrorDescription) -> Void
+    
+    var isEmpty: Bool {
+        return container.isEmpty
+    }
     
     init(container: [ObjectIdentifier: ValidationElement] = [:],
          onValid: @escaping () -> Void,
@@ -46,46 +53,26 @@ class ValidationContainer {
         container.removeAll()
     }
     
-    var isEmpty: Bool {
-        return container.isEmpty
-    }
-    
     func validateAll() {
         var validationsErrors: [ValidationPriority] = []
         container.values.forEach {
-            let result = $0.validation.validate()
-            $0.validationHandler(result)
-            if !result.isValid {
-                validationsErrors.append(result)
-            }
+            perform(on: $0) { validationsErrors.append($0) }
         }
-        guard !validationsErrors.isEmpty else {
-            return onValid()
+        guard validationsErrors.isEmpty else {
+            let averagedError = validationsErrors
+                                    .reduce(ValidationPriority()) { $0 && $1 }
+            return onInvalid(averagedError.description)
         }
-        let averagedError = validationsErrors
-                                .reduce(ValidationPriority()) { $0 && $1 }
-        onInvalid(averagedError.description)
+        return onValid()
+        
     }
     
-}
-
-protocol ValidationDelegate {
-    func onValid()
-    func onInvalid(using description: ValidationResult.ErrorDescription)
-}
-
-struct ValidationElement {
-    
-    let validation: Validated
-    let validationHandler: UIKitWrapper.ValidationHandler
-    
-    let validationAction: () -> Void
-}
-
-extension ValidationElement {
-    init(wrappedElement: UIKitWrapper) {
-        self.init(validation: wrappedElement.validation,
-                  validationHandler: wrappedElement.validationHandler,
-                  validationAction: wrappedElement.validate)
+    private func perform(on item: ValidationElement,
+                         using handler: (ValidationPriority) -> Void) {
+        let validationPriority = item.validation.validate()
+        item.validationHandler(validationPriority)
+        if !validationPriority.isValid {
+            handler(validationPriority)
+        }
     }
 }

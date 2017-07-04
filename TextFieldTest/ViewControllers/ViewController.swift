@@ -63,6 +63,10 @@ class ViewController: UIViewController {
         let res = new.validate(using: rule)
         print(res)*/
         
+        let value: String??? = "Hi"
+        /*let res: String = value.cast(proprty: value)
+        print(res)*/
+        
         container = ValidationContainer(delegate: self)
         container?.append(wrappedElement: field)
         container?.append(wrappedElement: newField)
