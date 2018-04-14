@@ -7,7 +7,7 @@
 //
 
 protocol Validatable {
-    var validationResult: PriorityResult { get }
+    var validationResult: Validatorix.PriorityResult { get }
 }
 
 enum Validatorix {

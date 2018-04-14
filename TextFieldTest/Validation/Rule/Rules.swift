@@ -42,7 +42,7 @@ extension Validatorix.Rules {
 
 extension Sequence where Iterator.Element: Rule {
     
-    func validate(value: Self.Element.Value) -> [PriorityResult] {
+    func validate(value: Self.Element.Value) -> [Validatorix.PriorityResult] {
         return self.compactMap { $0.validation(for: value) }
     }
     

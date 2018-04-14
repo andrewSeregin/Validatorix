@@ -93,7 +93,7 @@ extension Validatorix {
             }
             
             guard errors.isEmpty else {
-                onInvalid?(errors.averagedError.description)
+                onInvalid?(errors.average.description)
                 return
             }
             

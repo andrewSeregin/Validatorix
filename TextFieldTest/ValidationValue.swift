@@ -10,7 +10,7 @@ import UIKit
 
 protocol ValidationValue {
     
-    typealias Priority = PriorityResult
+    typealias Priority = Validatorix.PriorityResult
     
     associatedtype Value
     
@@ -42,7 +42,7 @@ extension ValidationValue {
         }
         
         let errorDescription = Validatorix.Constants.Result.Error.Reasons.emptyValue
-        return PriorityResult(result: .invalid(errorDescription))
+        return Validatorix.PriorityResult(result: .invalid(errorDescription))
         
     }
 }

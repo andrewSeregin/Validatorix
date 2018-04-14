@@ -13,16 +13,16 @@ protocol Rule {
     associatedtype Value
     var template: Validatorix.RuleTemplate<Value> { get }
     
-    func validation(for value: Value) -> PriorityResult
+    func validation(for value: Value) -> Validatorix.PriorityResult
     
 }
 
 extension Rule {
     
-    func validation(for value: Value) -> PriorityResult {
+    func validation(for value: Value) -> Validatorix.PriorityResult {
         let validationResult: Validatorix.Result = template.condition(value) ? .valid : .invalid(template.error)
-        return PriorityResult(isPrioruty: template.isPriority,
-                              result: validationResult)
+        return Validatorix.PriorityResult(isPrioruty: template.isPriority,
+                                          result: validationResult)
     }
     
 }
