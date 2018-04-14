@@ -26,8 +26,8 @@ extension Validation {
             self.handler = validationHandler
         }
         
-        func setNeedsValidateOnChange(_ enable: Bool) {
-            element.enableProvideEventOnEditingChanged(enable, for: self, action: #selector(validate))
+        func setNeedsValidateOnChange(_ isEnable: Bool) {
+            element.enableProvideEventOnEditingChanged(isEnable, for: self, action: #selector(validate))
         }
         
         deinit {
@@ -48,7 +48,7 @@ extension Validation {
 
 protocol EventProvider {
     
-    func enableProvideEventOnEditingChanged(_ enable: Bool, for target: Any, action: Selector)
+    func enableProvideEventOnEditingChanged(_ isEnable: Bool, for target: Any, action: Selector)
 }
 
 extension EventProvider where Self: UIControl {
