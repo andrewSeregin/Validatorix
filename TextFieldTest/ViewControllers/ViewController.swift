@@ -15,14 +15,15 @@ class ViewController: UIViewController {
     @IBOutlet private(set) weak var blockTextField: UITextField!
     @IBOutlet private(set) weak var resultLabel: UILabel!
     
-    var field: UIKitWrapper?
-    var newField: UIKitWrapper?
-    var sliderWraper: UIKitWrapper?
+    var field: WrappedElement?
+    var newField: WrappedElement?
+    var sliderWraper: WrappedElement?
     
     var container: ValidationContainer?
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         /*let r = AnyRule { $0 == "Andrew" }
         print(textField.validate(using: r))
@@ -49,7 +50,6 @@ class ViewController: UIViewController {
         //let value: String? = nil
         
         /*let nsString: NSString? = nil
-        print(nsString.isNotNil)
         let nsStringRule: AnyRule<NSString> = AnyRule { $0 == "Andrew" }
         
         let result = nsString.validate(using: nsStringRule)
@@ -63,15 +63,22 @@ class ViewController: UIViewController {
         let res = new.validate(using: rule)
         print(res)*/
         
-        let value: String??? = "Hi"
-        /*let res: String = value.cast(proprty: value)
-        print(res)*/
-        
         container = ValidationContainer(delegate: self)
-        container?.append(wrappedElement: field)
-        container?.append(wrappedElement: newField)
-        container?.append(wrappedElement: sliderWraper)
+        container?.append(field)
+        container?.append(newField)
+        container?.append(sliderWraper)
+        container?.validate()
     }
+}
+
+struct Ff: ValidationDelegate {
+    func onValid() {
+    }
+    
+    func onInvalid(using description: ValidationResult.ErrorDescription) {
+    }
+    
+
 }
 
 extension ViewController: ValidationDelegate {
@@ -84,6 +91,5 @@ extension ViewController: ValidationDelegate {
     }
 }
 
-struct New {
-    let one: String
-}
+
+

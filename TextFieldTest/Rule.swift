@@ -8,42 +8,49 @@
 
 import Foundation
 
-struct RuleDescription<Value> {
-    var priority: Bool
-    var errorDescription: ValidationResult.ErrorDescription
-    var condition: (Value) -> Bool
-}
-
 protocol Rule {
-    associatedtype Value
-    var description: RuleDescription<Value> { get }
     
-    func validation(for value: Value) -> ValidationPriority
+    associatedtype Value
+    var template: RuleTemplate<Value> { get }
+    
+    func validation(for value: Value) -> PriorityResult
+    
 }
 
 extension Rule {
-    func validation(for value: Value) -> ValidationPriority {
-        let validationResult: ValidationResult = description.condition(value) ? .valid : .invalid(description.errorDescription)
-        return ValidationPriority(isPrioruty: description.priority,
-                                  validationResult: validationResult)
+    
+    func validation(for value: Value) -> PriorityResult {
+        let validationResult: ValidationResult = template.condition(value) ? .valid : .invalid(template.error)
+        return PriorityResult(isPrioruty: template.isPriority,
+                              result: validationResult)
     }
+    
+}
+
+struct RuleTemplate<Value> {
+    
+    var isPriority: Bool
+    var error: ValidationResult.ErrorDescription
+    var condition: (Value) -> Bool
+    
 }
 
 struct AnyRule<Value>: Rule {
-    let description: RuleDescription<Value>
+    let template: RuleTemplate<Value>
 }
 
 extension AnyRule {
-    init(priority: Bool = true,
-         errorDescription: ValidationResult.ErrorDescription = Constants.ValidationResult.ErrorDescription.base,
+    
+    init(isPriority: Bool = true,
+         errorDescription: ValidationResult.ErrorDescription = Constants.ValidationResult.Error.base,
          condition: @escaping (Value) -> Bool) {
-        let description = RuleDescription(priority: priority,
-                                          errorDescription: errorDescription,
+        let template = RuleTemplate(isPriority: isPriority,
+                                          error: errorDescription,
                                           condition: condition)
-        self.init(description: description)
+        self.init(template: template)
     }
     
-    init<R: Rule>(converted rule: R) where R.Value == Value {
-        self.init(description: rule.description)
+    init<Principle: Rule>(converted rule: Principle) where Principle.Value == Value {
+        self.init(template: rule.template)
     }
 }

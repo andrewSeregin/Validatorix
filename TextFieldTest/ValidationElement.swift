@@ -8,16 +8,26 @@
 
 struct ValidationElement {
     
-    let validation: Validated
-    let validationHandler: UIKitWrapper.ValidationHandler
+    let validation: Validatable
+    let handler: WrappedElement.ValidationHandler
     
     let validationAction: () -> Void
+    
+    func performValidation() {
+        handler(validationResult)
+    }
+    
+    var validationResult: PriorityResult {
+        return validation.validationResult
+    }
 }
 
 extension ValidationElement {
-    init(wrappedElement: UIKitWrapper) {
+    
+    init(wrappedElement: WrappedElement) {
         self.init(validation: wrappedElement.validation,
-                  validationHandler: wrappedElement.validationHandler,
+                  handler: wrappedElement.handler,
                   validationAction: wrappedElement.validate)
     }
+    
 }

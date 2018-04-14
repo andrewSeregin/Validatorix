@@ -6,29 +6,41 @@
 //  Copyright © 2017 Andrew Seregin. All rights reserved.
 //
 
-struct ValidationPriority {
+extension Bool {
+    var not: Bool { return !self }
+}
+
+struct PriorityResult {
     let isPrioruty: Bool
-    let validationResult: ValidationResult
-    
+    let result: ValidationResult
+
     init(isPrioruty: Bool = true,
-         validationResult: ValidationResult = .valid) {
+         result: ValidationResult = .valid) {
         self.isPrioruty = isPrioruty
-        self.validationResult = validationResult
+        self.result = result
     }
     
-    static func &&(lhs: ValidationPriority,
-                   rhs: @autoclosure () -> ValidationPriority)  -> ValidationPriority {
-            let validationResult = lhs.validationResult && rhs().validationResult
-            return ValidationPriority(validationResult: validationResult)
+    static func && (lhs: PriorityResult,
+                    rhs: @autoclosure () -> PriorityResult)  -> PriorityResult {
+            let validationResult = lhs.result && rhs().result
+            return PriorityResult(result: validationResult)
     }
     
     var isValid: Bool {
-        return self.validationResult.isValid
+        return self.result.isValid
     }
 }
 
-extension ValidationPriority: CustomStringConvertible {
+extension PriorityResult: CustomStringConvertible {
     var description: String {
-        return validationResult.description
+        return result.description
     }
+}
+
+extension Sequence where Iterator.Element == PriorityResult {
+    
+    var averagedError: PriorityResult {
+        return self.reduce(PriorityResult()) { $0 && $1 }
+    }
+    
 }

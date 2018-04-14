@@ -9,31 +9,39 @@
 import UIKit
 
 protocol ValidationValue {
-    associatedtype Value
-    var validationValue: Value { get }
-    var isNotNil: Bool { get }
+    typealias Priority = PriorityResult
     
-    func validate<R: Rule>(using rule: R) -> ValidationPriority  where R.Value == Self.Value
-    func validate(using scopeOfRule: ScopeOfRules<Self.Value>) -> ValidationPriority
+    associatedtype Value
+    
+    var value: Value { get }
+    var isEmpty: Bool { get }
+    
+    func validate<R: Rule>(by rule: R) -> Priority
+    func validate(by rules: Rules<Value>) -> Priority
 }
 
 extension ValidationValue {
-    var validationValue: Self { return self }
-    var isNotNil: Bool { return true }
     
-    func validate<R: Rule>(using rule: R) -> ValidationPriority  where R.Value == Self.Value {
-        let scope = ScopeOfRules(rules: [rule])
-        return validate(using: scope)
+    var value: Self { return self }
+    var isEmpty: Bool { return false }
+    
+    func validate<R: Rule>(by rule: R) -> Priority  {
+        guard let rules = Rules(rules: [rule]) as? Rules<Value> else {
+            let errorDescription = Constants.ValidationResult.Error.Reasons.mismatchedType
+            return Priority(result: .invalid(errorDescription))
+        }
+        return validate(by: rules)
     }
     
-    func validate(using scopeOfRule: ScopeOfRules<Self.Value>) -> ValidationPriority {
-        if isNotNil {
-            return scopeOfRule
-                    .validate(value: self.validationValue)
-                    .reduce(ValidationPriority()) { $0 && $1 }
+    func validate(by rules: Rules<Value>) -> Priority {
+        
+        guard isEmpty else {
+            return rules.validate(value: value).reduce(Priority()) { $0 && $1 }
         }
-        let validationError = Constants.ValidationResult.ErrorDescription.empty
-        return ValidationPriority(validationResult: .invalid(validationError))
+        
+        let errorDescription = Constants.ValidationResult.Error.Reasons.emptyValue
+        return PriorityResult(result: .invalid(errorDescription))
+        
     }
 }
 
@@ -44,26 +52,25 @@ extension String: ValidationValue {}
 extension Date: ValidationValue {}
 
 extension Optional: ValidationValue {
-    var validationValue: Wrapped {
+    
+    var value: Wrapped {
         return unsafelyUnwrapped
     }
     
-    var isNotNil: Bool {
+    var isEmpty: Bool {
         switch self {
-        case .none: return false
-        case .some(_): return true
+        case .none: return true
+        case .some: return false
         }
     }
 }
 
-extension UITextView: ValidationValue {
-    var validationValue: String { return text }
-}
-
 extension UITextField: ValidationValue {
-    var validationValue: String { return text ?? "" }
+    var value: String { return text ?? ""}
 }
 
-extension UISlider: ValidationValue {
-    var validationValue: Float { return value }
+extension UITextView: ValidationValue {
+    var value: String { return text }
 }
+
+extension UISlider: ValidationValue {}

@@ -8,41 +8,62 @@
 
 import UIKit
 
+protocol ValidationContainerAppendableMixin {}
+
+extension ValidationContainerAppendableMixin where Self: EventProvider & ValidationValue & ValidationWrappableMixin {
+    
+    func append(to container: ValidationContainer,
+                basedOn rule: AnyRule<Self.Value>,
+                for handler: @escaping WrappedElement.ValidationHandler = { _ in }) {
+        
+        let wrapped = self.wrapp(by: rule, for: handler)
+        container.append(wrapped)
+    }
+    
+}
+
+protocol ValidationWrappableMixin {}
+
+extension ValidationWrappableMixin where Self: EventProvider & ValidationValue {
+    
+    func wrapp(by rules: AnyRule<Self.Value>,
+               for handler: @escaping WrappedElement.ValidationHandler) -> WrappedElement {
+        let validationCore = Validation.Validatorix(value: value, rule: rules)
+        return WrappedElement(element: self,
+                              validation: validationCore,
+                              validationHandler: handler)
+    }
+}
+
+extension UITextField: ValidationContainerAppendableMixin {}
+extension UITextField: ValidationWrappableMixin {}
+
 class NewViewController: UIViewController {
 
+    let value = UISlider(frame: .zero)
+    
     @IBOutlet weak var validationLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
-    var wraper: UIKitWrapper?
+    var wraper: WrappedElement?
     
     @IBOutlet weak var secondTextView: UITextView!
-    var secondWraper: UIKitWrapper?
+    var secondWraper: WrappedElement?
     
+    
+    let textField = UITextField(frame: .zero)
+
     var container: ValidationContainer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rule = AnyRule { $0 == "Andrew" }
-        wraper = UIKitWrapper(element: textView,
-                              validation: Validatorix(value: textView, rule: rule)) {
-                                print($0)
-        }
-        //wraper?.validateOnChange(enabled: true)
-        
-        let ruleTwo = AnyRule { $0 == "A" }
-        secondWraper = UIKitWrapper(element: secondTextView,
-                                    validation: Validatorix(value: secondTextView, rule: ruleTwo)) {
-                                        print($0)
-        }
-        //secondWraper?.validateOnChange(enabled: true)
-        
-        container = ValidationContainer(delegate: self)
-        container?.append(wrappedElement: wraper)
-        container?.append(wrappedElement: secondWraper)
+        let container = ValidationContainer(delegate: self)
+        let ruleTwo = Validation.Populator.Equality.equal(to: "Andrew")
+        textField.append(to: container, basedOn: ruleTwo)
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
-        container?.validateAll()
+        container?.validate()
     }
 }
 

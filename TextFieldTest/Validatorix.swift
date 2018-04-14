@@ -6,33 +6,42 @@
 //  Copyright © 2017 Andrew Seregin. All rights reserved.
 //
 
-protocol Validated {
-    func validate() -> ValidationPriority
+protocol Validatable {
+    
+    var validationResult: PriorityResult { get }
+    
 }
 
-struct Validatorix<Value: ValidationValue>: Validated {
+enum Validation {
     
-    let value: Value
-    let scopeOfRule: ScopeOfRules<Value.Value>
-    
-    func validate() -> ValidationPriority {
-        return Validatorix.validate(input: value, using: scopeOfRule)
+    struct Validatorix<Value: ValidationValue>: Validatable {
+        
+        let value: Value
+        let rules: Rules<Value.Value>
+        
+        var validationResult: PriorityResult {
+            return Validatorix.validate(input: value, using: rules)
+        }
+        
+        static func validate<Value: ValidationValue, Principle: Rule>(input value: Value,
+                                                                      using rule: Principle) -> PriorityResult where Principle.Value == Value.Value {
+            return value.validate(by: rule)
+        }
+        
+        static func validate<Value: ValidationValue>(input value: Value,
+                                                     using rules: Rules<Value.Value>) -> PriorityResult {
+            return value.validate(by: rules)
+        }
     }
     
-    static func validate<Value: ValidationValue, R: Rule>(input value: Value,
-                                                          using rule: R) -> ValidationPriority where R.Value == Value.Value {
-        return value.validate(using: rule)
-    }
-    
-    static func validate<Value: ValidationValue>(input value: Value,
-                                                 using scopeOfRule: ScopeOfRules<Value.Value>) -> ValidationPriority {
-        return value.validate(using: scopeOfRule)
-    }
 }
 
-extension Validatorix {
-    init<R: Rule>(value: Value, rule: R) where R.Value == Value.Value {
-        let scopeOfRule = ScopeOfRules(rules: [rule])
-        self.init(value: value, scopeOfRule: scopeOfRule)
+
+extension Validation.Validatorix {
+    
+    init<Principle: Rule>(value: Value, rule: Principle) where Principle.Value == Value.Value {
+        let rules = Rules(rules: [rule])
+        self.init(value: value, rules: rules)
     }
+    
 }

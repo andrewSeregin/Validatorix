@@ -13,66 +13,90 @@ protocol ValidationDelegate {
 
 class ValidationContainer {
     
+    typealias ErrorDescription = ValidationResult.ErrorDescription
+    
+    typealias ValidHandler = () -> Void
+    typealias InvalidHandler = (ErrorDescription) -> Void
+    
     private var container: [ObjectIdentifier: ValidationElement] = [:]
-    let onValid: () -> Void
-    let onInvalid: (ValidationResult.ErrorDescription) -> Void
+    
+    private var onValid: ValidHandler?
+    private var onInvalid: InvalidHandler?
     
     var isEmpty: Bool {
         return container.isEmpty
     }
     
     init(container: [ObjectIdentifier: ValidationElement] = [:],
-         onValid: @escaping () -> Void,
-         onInvalid: @escaping (ValidationResult.ErrorDescription) -> Void) {
+         onValid: ValidHandler?,
+         onInvalid: InvalidHandler?) {
         self.container = container
         self.onValid = onValid
         self.onInvalid = onInvalid
     }
     
-    convenience init(container:  [ObjectIdentifier: ValidationElement] = [:],
-                     delegate: ValidationDelegate) {
+    convenience init<Delegate: ValidationDelegate & AnyObject>(container:  [ObjectIdentifier: ValidationElement] = [:],
+                                                               delegate: Delegate)  {
+        
+        self.init(container: container,
+                  onValid: { [weak delegate] in delegate?.onValid() },
+                  onInvalid: { [weak delegate] error in delegate?.onInvalid(using: error) })
+    }
+    
+    convenience init<Delegate: ValidationDelegate>(container: [ObjectIdentifier: ValidationElement] = [:],
+                                       delegate: Delegate) {
         self.init(container: container,
                   onValid: delegate.onValid,
                   onInvalid: delegate.onInvalid(using:))
     }
     
-    func append(wrappedElement: UIKitWrapper?) {
-        if let wrapped = wrappedElement {
-            let element = ValidationElement(wrappedElement: wrapped)
-            let identifier = ObjectIdentifier(wrapped)
-            container[identifier] = element
-        }
+    func change<Delegate: ValidationDelegate & AnyObject>(delegate: Delegate) {
+        self.onValid = { [weak delegate] in delegate?.onValid() }
+        self.onInvalid = { [weak delegate] error in delegate?.onInvalid(using: error) }
     }
     
-    func remove(wrappedElement: UIKitWrapper) {
-        let key = ObjectIdentifier(wrappedElement)
-        container.removeValue(forKey: key)
+    func change<Delegate: ValidationDelegate>(delegate: Delegate) {
+        self.onValid = delegate.onValid
+        self.onInvalid = delegate.onInvalid(using:)
+    }
+    
+    func removeDelegate() {
+        self.onValid = nil
+        self.onInvalid = nil
+    }
+    
+    func append(_ wrappedElement: WrappedElement?) {
+        guard let element = wrappedElement else { return }
+        let identifier = ObjectIdentifier(element)
+        container[identifier] = ValidationElement(wrappedElement: element)
+    }
+    
+    
+    func remove(_ wrappedElement: WrappedElement) {
+        let identifier = ObjectIdentifier(wrappedElement)
+        container.removeValue(forKey: identifier)
     }
     
     func removeAll() {
         container.removeAll()
     }
     
-    func validateAll() {
-        var validationsErrors: [ValidationPriority] = []
-        container.values.forEach {
-            perform(on: $0) { validationsErrors.append($0) }
+    func validate() {
+        
+        let errors = container.map { record -> PriorityResult in
+            record.value.performValidation()
+            return record.value.validationResult
+        }.filter {
+            $0.isValid.not
         }
-        guard validationsErrors.isEmpty else {
-            let averagedError = validationsErrors
-                                    .reduce(ValidationPriority()) { $0 && $1 }
-            return onInvalid(averagedError.description)
+        
+        guard errors.isEmpty else {
+            onInvalid?(errors.averagedError.description)
+            return
         }
-        return onValid()
+        
+        onValid?()
         
     }
     
-    private func perform(on item: ValidationElement,
-                         using handler: (ValidationPriority) -> Void) {
-        let validationPriority = item.validation.validate()
-        item.validationHandler(validationPriority)
-        if !validationPriority.isValid {
-            handler(validationPriority)
-        }
-    }
 }
