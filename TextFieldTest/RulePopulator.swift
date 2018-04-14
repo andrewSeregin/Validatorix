@@ -57,7 +57,7 @@ extension Validation {
         
         enum RegExp {
             
-            static func makeCustomRule<Pattern: CustomStringConvertible>(using pattern: Pattern) -> AnyRule<String> {
+            static func custom<Pattern: CustomStringConvertible>(by pattern: Pattern) -> AnyRule<String> {
                 let predicate = NSPredicate(format: Constants.RegExp.predicateFormat, pattern.description)
                 return AnyRule { predicate.evaluate(with: $0) }
             }
