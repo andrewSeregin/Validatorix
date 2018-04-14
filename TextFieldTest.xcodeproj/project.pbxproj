@@ -8,44 +8,46 @@
 
 /* Begin PBXBuildFile section */
 		182FE96220827D76006088E1 /* ValidationMixin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182FE96120827D76006088E1 /* ValidationMixin.swift */; };
+		182FE96620828860006088E1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182FE96520828860006088E1 /* Error.swift */; };
 		B18D3E771EFA337D00F56E6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3E761EFA337D00F56E6F /* AppDelegate.swift */; };
 		B18D3E7C1EFA337D00F56E6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B18D3E7A1EFA337D00F56E6F /* Main.storyboard */; };
 		B18D3E7E1EFA337D00F56E6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18D3E7D1EFA337D00F56E6F /* Assets.xcassets */; };
 		B18D3E811EFA337D00F56E6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B18D3E7F1EFA337D00F56E6F /* LaunchScreen.storyboard */; };
-		B18D3EC91EFA67CB00F56E6F /* Validatorix.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EC81EFA67CB00F56E6F /* Validatorix.swift */; };
+		B18D3EC91EFA67CB00F56E6F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EC81EFA67CB00F56E6F /* Validation.swift */; };
 		B18D3ECB1EFA67D200F56E6F /* ValidationValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ECA1EFA67D200F56E6F /* ValidationValue.swift */; };
-		B18D3ECD1EFA67DA00F56E6F /* RulePopulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ECC1EFA67DA00F56E6F /* RulePopulator.swift */; };
+		B18D3ECD1EFA67DA00F56E6F /* Populator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ECC1EFA67DA00F56E6F /* Populator.swift */; };
 		B18D3ECF1EFA67E000F56E6F /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ECE1EFA67E000F56E6F /* Rule.swift */; };
 		B18D3ED11EFA67E600F56E6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ED01EFA67E600F56E6F /* Constants.swift */; };
-		B18D3ED31EFA67EC00F56E6F /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ED21EFA67EC00F56E6F /* ValidationResult.swift */; };
-		B18D3ED51EFA67F200F56E6F /* ValidationPriority .swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ED41EFA67F200F56E6F /* ValidationPriority .swift */; };
-		B18D3ED91EFA69DE00F56E6F /* ValidationElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ED81EFA69DE00F56E6F /* ValidationElement.swift */; };
+		B18D3ED31EFA67EC00F56E6F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ED21EFA67EC00F56E6F /* Result.swift */; };
+		B18D3ED51EFA67F200F56E6F /* PriorityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ED41EFA67F200F56E6F /* PriorityResult.swift */; };
+		B18D3ED91EFA69DE00F56E6F /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3ED81EFA69DE00F56E6F /* Element.swift */; };
 		B18D3EDD1EFAAC9D00F56E6F /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EDC1EFAAC9D00F56E6F /* Rules.swift */; };
 		B18D3EE11EFAACF300F56E6F /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EDF1EFAACF300F56E6F /* NewViewController.swift */; };
 		B18D3EE21EFAACF300F56E6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3EE01EFAACF300F56E6F /* ViewController.swift */; };
-		B1C98D841F060CF7006C00C2 /* ValidationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C98D831F060CF7006C00C2 /* ValidationContainer.swift */; };
+		B1C98D841F060CF7006C00C2 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C98D831F060CF7006C00C2 /* Container.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		182FE96120827D76006088E1 /* ValidationMixin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationMixin.swift; sourceTree = "<group>"; };
+		182FE96520828860006088E1 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		B18D3E731EFA337D00F56E6F /* TextFieldTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextFieldTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18D3E761EFA337D00F56E6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B18D3E7B1EFA337D00F56E6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B18D3E7D1EFA337D00F56E6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B18D3E801EFA337D00F56E6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B18D3E821EFA337D00F56E6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B18D3EC81EFA67CB00F56E6F /* Validatorix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validatorix.swift; sourceTree = "<group>"; };
+		B18D3EC81EFA67CB00F56E6F /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		B18D3ECA1EFA67D200F56E6F /* ValidationValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationValue.swift; sourceTree = "<group>"; };
-		B18D3ECC1EFA67DA00F56E6F /* RulePopulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulePopulator.swift; sourceTree = "<group>"; };
+		B18D3ECC1EFA67DA00F56E6F /* Populator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Populator.swift; sourceTree = "<group>"; };
 		B18D3ECE1EFA67E000F56E6F /* Rule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		B18D3ED01EFA67E600F56E6F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B18D3ED21EFA67EC00F56E6F /* ValidationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
-		B18D3ED41EFA67F200F56E6F /* ValidationPriority .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ValidationPriority .swift"; sourceTree = "<group>"; };
-		B18D3ED81EFA69DE00F56E6F /* ValidationElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationElement.swift; sourceTree = "<group>"; };
+		B18D3ED21EFA67EC00F56E6F /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B18D3ED41EFA67F200F56E6F /* PriorityResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityResult.swift; sourceTree = "<group>"; };
+		B18D3ED81EFA69DE00F56E6F /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		B18D3EDC1EFAAC9D00F56E6F /* Rules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		B18D3EDF1EFAACF300F56E6F /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		B18D3EE01EFAACF300F56E6F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B1C98D831F060CF7006C00C2 /* ValidationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationContainer.swift; sourceTree = "<group>"; };
+		B1C98D831F060CF7006C00C2 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		182FE96320828527006088E1 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				B1C98D831F060CF7006C00C2 /* Container.swift */,
+				B18D3ED81EFA69DE00F56E6F /* Element.swift */,
+				182FE96520828860006088E1 /* Error.swift */,
+				B18D3ECC1EFA67DA00F56E6F /* Populator.swift */,
+				B18D3ED21EFA67EC00F56E6F /* Result.swift */,
+				182FE9642082859A006088E1 /* Rule */,
+				B18D3EC81EFA67CB00F56E6F /* Validation.swift */,
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
+		182FE9642082859A006088E1 /* Rule */ = {
+			isa = PBXGroup;
+			children = (
+				B18D3ECE1EFA67E000F56E6F /* Rule.swift */,
+				B18D3EDC1EFAAC9D00F56E6F /* Rules.swift */,
+			);
+			path = Rule;
+			sourceTree = "<group>";
+		};
 		B18D3E6A1EFA337D00F56E6F = {
 			isa = PBXGroup;
 			children = (
@@ -78,22 +103,16 @@
 		B18D3E751EFA337D00F56E6F /* TextFieldTest */ = {
 			isa = PBXGroup;
 			children = (
+				182FE96320828527006088E1 /* Validation */,
 				B18D3E761EFA337D00F56E6F /* AppDelegate.swift */,
 				B18D3E7D1EFA337D00F56E6F /* Assets.xcassets */,
 				B18D3ED01EFA67E600F56E6F /* Constants.swift */,
 				B18D3E821EFA337D00F56E6F /* Info.plist */,
 				B18D3E7F1EFA337D00F56E6F /* LaunchScreen.storyboard */,
 				B18D3E7A1EFA337D00F56E6F /* Main.storyboard */,
-				B18D3ECE1EFA67E000F56E6F /* Rule.swift */,
-				B18D3ECC1EFA67DA00F56E6F /* RulePopulator.swift */,
-				B18D3EDC1EFAAC9D00F56E6F /* Rules.swift */,
-				B1C98D831F060CF7006C00C2 /* ValidationContainer.swift */,
-				B18D3ED81EFA69DE00F56E6F /* ValidationElement.swift */,
 				182FE96120827D76006088E1 /* ValidationMixin.swift */,
-				B18D3ED41EFA67F200F56E6F /* ValidationPriority .swift */,
-				B18D3ED21EFA67EC00F56E6F /* ValidationResult.swift */,
+				B18D3ED41EFA67F200F56E6F /* PriorityResult.swift */,
 				B18D3ECA1EFA67D200F56E6F /* ValidationValue.swift */,
-				B18D3EC81EFA67CB00F56E6F /* Validatorix.swift */,
 				B18D3EDE1EFAACD200F56E6F /* ViewControllers */,
 			);
 			path = TextFieldTest;
@@ -182,19 +201,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B18D3ECB1EFA67D200F56E6F /* ValidationValue.swift in Sources */,
-				B18D3ED51EFA67F200F56E6F /* ValidationPriority .swift in Sources */,
+				B18D3ED51EFA67F200F56E6F /* PriorityResult.swift in Sources */,
 				B18D3EDD1EFAAC9D00F56E6F /* Rules.swift in Sources */,
-				B18D3EC91EFA67CB00F56E6F /* Validatorix.swift in Sources */,
+				B18D3EC91EFA67CB00F56E6F /* Validation.swift in Sources */,
 				182FE96220827D76006088E1 /* ValidationMixin.swift in Sources */,
-				B18D3ED91EFA69DE00F56E6F /* ValidationElement.swift in Sources */,
-				B1C98D841F060CF7006C00C2 /* ValidationContainer.swift in Sources */,
+				B18D3ED91EFA69DE00F56E6F /* Element.swift in Sources */,
+				B1C98D841F060CF7006C00C2 /* Container.swift in Sources */,
 				B18D3EE11EFAACF300F56E6F /* NewViewController.swift in Sources */,
 				B18D3EE21EFAACF300F56E6F /* ViewController.swift in Sources */,
-				B18D3ED31EFA67EC00F56E6F /* ValidationResult.swift in Sources */,
+				B18D3ED31EFA67EC00F56E6F /* Result.swift in Sources */,
 				B18D3ECF1EFA67E000F56E6F /* Rule.swift in Sources */,
 				B18D3ED11EFA67E600F56E6F /* Constants.swift in Sources */,
 				B18D3E771EFA337D00F56E6F /* AppDelegate.swift in Sources */,
-				B18D3ECD1EFA67DA00F56E6F /* RulePopulator.swift in Sources */,
+				182FE96620828860006088E1 /* Error.swift in Sources */,
+				B18D3ECD1EFA67DA00F56E6F /* Populator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

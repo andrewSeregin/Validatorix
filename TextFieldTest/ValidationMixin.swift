@@ -12,9 +12,9 @@ protocol ContainerAppendableMixin {}
 
 extension ContainerAppendableMixin where Self: EventProvider & ValidationValue & WrappableMixin {
     
-    func register(to container: Validation.Container,
-                  basedOn rule: AnyRule<Self.Value>,
-                  for handler: @escaping Validation.Element.ValidationHandler = { _ in }) {
+    func register(to container: Validatorix.Container,
+                  basedOn rule: Validatorix.AnyRule<Self.Value>,
+                  for handler: @escaping Validatorix.Element.ValidationHandler = { _ in }) {
         
         let wrapped = self.wrapp(by: rule, for: handler)
         container.append(wrapped)
@@ -27,10 +27,10 @@ protocol WrappableMixin {}
 
 extension WrappableMixin where Self: EventProvider & ValidationValue {
     
-    func wrapp(by rules: AnyRule<Self.Value>,
-               for handler: @escaping Validation.Element.ValidationHandler) -> Validation.Element {
-        let validationCore = Validation.Validatorix(value: value, rule: rules)
-        return Validation.Element(element: self,
+    func wrapp(by rules: Validatorix.AnyRule<Self.Value>,
+               for handler: @escaping Validatorix.Element.ValidationHandler) -> Validatorix.Element {
+        let validationCore = Validatorix.Validation(value: value, rule: rules)
+        return Validatorix.Element(element: self,
                                   validation: validationCore,
                                   validationHandler: handler)
     }

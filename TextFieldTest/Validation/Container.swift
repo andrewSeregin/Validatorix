@@ -8,19 +8,19 @@
 
 protocol ValidationDelegate {
     func onValid()
-    func onInvalid(using description: ValidationResult.ErrorDescription)
+    func onInvalid(using description: Validatorix.Result.ErrorDescription)
 }
 
-extension Validation {
+extension Validatorix {
     
     class Container {
         
-        typealias ErrorDescription = ValidationResult.ErrorDescription
+        typealias ErrorDescription = Validatorix.Result.ErrorDescription
         
         typealias ValidHandler = () -> Void
         typealias InvalidHandler = (ErrorDescription) -> Void
         
-        private var container: [ObjectIdentifier: Validation.Element] = [:]
+        private var container: [ObjectIdentifier: Validatorix.Element] = [:]
         
         private var onValid: ValidHandler?
         private var onInvalid: InvalidHandler?
@@ -29,7 +29,7 @@ extension Validation {
             return container.isEmpty
         }
         
-        init(container: [ObjectIdentifier: Validation.Element] = [:],
+        init(container: [ObjectIdentifier: Validatorix.Element] = [:],
              onValid: ValidHandler?,
              onInvalid: InvalidHandler?) {
             self.container = container
@@ -37,7 +37,7 @@ extension Validation {
             self.onInvalid = onInvalid
         }
         
-        convenience init<Delegate: ValidationDelegate & AnyObject>(container:  [ObjectIdentifier: Validation.Element] = [:],
+        convenience init<Delegate: ValidationDelegate & AnyObject>(container:  [ObjectIdentifier: Validatorix.Element] = [:],
                                                                    delegate: Delegate)  {
             
             self.init(container: container,
@@ -45,7 +45,7 @@ extension Validation {
                       onInvalid: { [weak delegate] error in delegate?.onInvalid(using: error) })
         }
         
-        convenience init<Delegate: ValidationDelegate>(container: [ObjectIdentifier: Validation.Element] = [:],
+        convenience init<Delegate: ValidationDelegate>(container: [ObjectIdentifier: Validatorix.Element] = [:],
                                                        delegate: Delegate) {
             self.init(container: container,
                       onValid: delegate.onValid,
@@ -67,14 +67,14 @@ extension Validation {
             self.onInvalid = nil
         }
         
-        func append(_ wrappedElement: Validation.Element?) {
+        func append(_ wrappedElement: Validatorix.Element?) {
             guard let element = wrappedElement else { return }
             let identifier = ObjectIdentifier(element)
             container[identifier] = element
         }
         
         
-        func remove(_ wrappedElement: Validation.Element) {
+        func remove(_ wrappedElement: Validatorix.Element) {
             let identifier = ObjectIdentifier(wrappedElement)
             container.removeValue(forKey: identifier)
         }

@@ -9,6 +9,7 @@
 import UIKit
 
 protocol ValidationValue {
+    
     typealias Priority = PriorityResult
     
     associatedtype Value
@@ -17,7 +18,8 @@ protocol ValidationValue {
     var isEmpty: Bool { get }
     
     func validate<Principle: Rule>(by rule: Principle) -> Priority
-    func validate(by rules: Rules<Value>) -> Priority
+    func validate(by rules: Validatorix.Rules<Value>) -> Priority
+    
 }
 
 extension ValidationValue {
@@ -26,20 +28,20 @@ extension ValidationValue {
     var isEmpty: Bool { return false }
     
     func validate<Principle: Rule>(by rule: Principle) -> Priority  {
-        guard let rules = Rules(rules: [rule]) as? Rules<Value> else {
-            let errorDescription = Constants.ValidationResult.Error.Reasons.mismatchedType
+        guard let rules = Validatorix.Rules(rules: [rule]) as? Validatorix.Rules<Value> else {
+            let errorDescription = Validatorix.Constants.Result.Error.Reasons.mismatchedType
             return Priority(result: .invalid(errorDescription))
         }
         return validate(by: rules)
     }
     
-    func validate(by rules: Rules<Value>) -> Priority {
+    func validate(by rules: Validatorix.Rules<Value>) -> Priority {
         
         guard isEmpty else {
             return rules.validate(value: value).reduce(Priority()) { $0 && $1 }
         }
         
-        let errorDescription = Constants.ValidationResult.Error.Reasons.emptyValue
+        let errorDescription = Validatorix.Constants.Result.Error.Reasons.emptyValue
         return PriorityResult(result: .invalid(errorDescription))
         
     }

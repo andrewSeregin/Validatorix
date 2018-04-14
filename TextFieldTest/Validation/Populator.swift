@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Validation {
+extension Validatorix {
     
     enum Populator {
         

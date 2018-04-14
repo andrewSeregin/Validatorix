@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Validation {
+extension Validatorix {
     
     class Element {
         
@@ -38,7 +38,7 @@ extension Validation {
     
 }
 
-@objc extension Validation.Element {
+@objc extension Validatorix.Element {
     
     func validate() {
         handler(validation.validationResult)

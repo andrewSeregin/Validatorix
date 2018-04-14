@@ -12,10 +12,10 @@ extension Bool {
 
 struct PriorityResult {
     let isPrioruty: Bool
-    let result: ValidationResult
+    let result: Validatorix.Result
 
     init(isPrioruty: Bool = true,
-         result: ValidationResult = .valid) {
+         result: Validatorix.Result = .valid) {
         self.isPrioruty = isPrioruty
         self.result = result
     }

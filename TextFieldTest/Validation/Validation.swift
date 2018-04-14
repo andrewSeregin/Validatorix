@@ -7,20 +7,18 @@
 //
 
 protocol Validatable {
-    
     var validationResult: PriorityResult { get }
-    
 }
 
-enum Validation {
+enum Validatorix {
     
-    struct Validatorix<Value: ValidationValue>: Validatable {
+    struct Validation<Value: ValidationValue>: Validatable {
         
         let value: Value
         let rules: Rules<Value.Value>
         
         var validationResult: PriorityResult {
-            return Validatorix.validate(input: value, using: rules)
+            return Validation.validate(input: value, using: rules)
         }
         
         static func validate<Value: ValidationValue, Principle: Rule>(input value: Value,
@@ -37,10 +35,10 @@ enum Validation {
 }
 
 
-extension Validation.Validatorix {
+extension Validatorix.Validation {
     
     init<Principle: Rule>(value: Value, rule: Principle) where Principle.Value == Value.Value {
-        let rules = Rules(rules: [rule])
+        let rules = Validatorix.Rules(rules: [rule])
         self.init(value: value, rules: rules)
     }
     

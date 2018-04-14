@@ -17,21 +17,21 @@ class NewViewController: UIViewController {
     
     @IBOutlet weak var validationLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
-    var wraper: Validation.Element?
+    var wraper: Validatorix.Element?
     
     @IBOutlet weak var secondTextView: UITextView!
-    var secondWraper: Validation.Element?
+    var secondWraper: Validatorix.Element?
     
     
     let textField = UITextField(frame: .zero)
     
-    var container: Validation.Container?
+    var container: Validatorix.Container?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let container = Validation.Container(delegate: self)
-        let ruleTwo = Validation.Populator.Equality.equal(to: "Andrew")
+        let container = Validatorix.Container(delegate: self)
+        let ruleTwo = Validatorix.Populator.Equality.equal(to: "Andrew")
         textField.register(to: container, basedOn: ruleTwo)
     }
     
@@ -46,7 +46,7 @@ extension NewViewController: ValidationDelegate {
         validationLabel.text = "Valid"
     }
     
-    func onInvalid(using description: ValidationResult.ErrorDescription) {
+    func onInvalid(using description: Validatorix.Result.ErrorDescription) {
         let alert = UIAlertController(title: "Validation Error", message: description, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)

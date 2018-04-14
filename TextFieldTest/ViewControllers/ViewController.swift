@@ -15,11 +15,11 @@ class ViewController: UIViewController {
     @IBOutlet private(set) weak var blockTextField: UITextField!
     @IBOutlet private(set) weak var resultLabel: UILabel!
     
-    var field: Validation.Element?
-    var newField: Validation.Element?
-    var sliderWraper: Validation.Element?
+    var field: Validatorix.Element?
+    var newField: Validatorix.Element?
+    var sliderWraper: Validatorix.Element?
     
-    var container: Validation.Container?
+    var container: Validatorix.Container?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         let res = new.validate(using: rule)
         print(res)*/
         
-        container = Validation.Container(delegate: self)
+        container = Validatorix.Container(delegate: self)
         container?.append(field)
         container?.append(newField)
         container?.append(sliderWraper)
@@ -77,7 +77,7 @@ extension ViewController: ValidationDelegate {
         print("Valid")
     }
     
-    func onInvalid(using description: ValidationResult.ErrorDescription) {
+    func onInvalid(using description: Validatorix.Result.ErrorDescription) {
         print(description)
     }
     
