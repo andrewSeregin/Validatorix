@@ -67,7 +67,6 @@ extension UISlider: EventProvider {}
 extension UISwitch: EventProvider {}
 extension UISegmentedControl: EventProvider {}
 
-
 extension EventProvider where Self: UITextView {
     
     func enableProvideEventOnEditingChanged(_ isEnable: Bool, for target: Any, action: Selector) {

@@ -31,7 +31,7 @@ struct Rules<Value> {
 extension Rules {
     
     init<Principle: Rule>(rules: [Principle]) where Principle.Value == Value {
-        self._rules = rules.flatMap(AnyRule.init)
+        self._rules = rules.compactMap(AnyRule.init)
     }
     
 }
@@ -39,7 +39,7 @@ extension Rules {
 extension Sequence where Iterator.Element: Rule {
     
     func validate(value: Self.Element.Value) -> [PriorityResult] {
-        return self.flatMap { $0.validation(for: value) }
+        return self.compactMap { $0.validation(for: value) }
     }
     
 }

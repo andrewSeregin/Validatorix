@@ -45,8 +45,8 @@ extension AnyRule {
          errorDescription: ValidationResult.ErrorDescription = Constants.ValidationResult.Error.base,
          condition: @escaping (Value) -> Bool) {
         let template = RuleTemplate(isPriority: isPriority,
-                                          error: errorDescription,
-                                          condition: condition)
+                                    error: errorDescription,
+                                    condition: condition)
         self.init(template: template)
     }
     

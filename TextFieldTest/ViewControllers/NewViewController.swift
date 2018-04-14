@@ -8,35 +8,8 @@
 
 import UIKit
 
-protocol ValidationContainerAppendableMixin {}
-
-extension ValidationContainerAppendableMixin where Self: EventProvider & ValidationValue & ValidationWrappableMixin {
-    
-    func append(to container: ValidationContainer,
-                basedOn rule: AnyRule<Self.Value>,
-                for handler: @escaping Validation.Element.ValidationHandler = { _ in }) {
-        
-        let wrapped = self.wrapp(by: rule, for: handler)
-        container.append(wrapped)
-    }
-    
-}
-
-protocol ValidationWrappableMixin {}
-
-extension ValidationWrappableMixin where Self: EventProvider & ValidationValue {
-    
-    func wrapp(by rules: AnyRule<Self.Value>,
-               for handler: @escaping Validation.Element.ValidationHandler) -> Validation.Element {
-        let validationCore = Validation.Validatorix(value: value, rule: rules)
-        return Validation.Element(element: self,
-                                  validation: validationCore,
-                                  validationHandler: handler)
-    }
-}
-
-extension UITextField: ValidationContainerAppendableMixin {}
-extension UITextField: ValidationWrappableMixin {}
+extension UITextField: ContainerAppendableMixin {}
+extension UITextField: WrappableMixin {}
 
 class NewViewController: UIViewController {
 
@@ -51,15 +24,15 @@ class NewViewController: UIViewController {
     
     
     let textField = UITextField(frame: .zero)
-
-    var container: ValidationContainer?
+    
+    var container: Validation.Container?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let container = ValidationContainer(delegate: self)
+        let container = Validation.Container(delegate: self)
         let ruleTwo = Validation.Populator.Equality.equal(to: "Andrew")
-        textField.append(to: container, basedOn: ruleTwo)
+        textField.register(to: container, basedOn: ruleTwo)
     }
     
     @IBAction func buttonTapped(_ sender: Any) {

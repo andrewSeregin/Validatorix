@@ -22,8 +22,11 @@ struct PriorityResult {
     
     static func && (lhs: PriorityResult,
                     rhs: @autoclosure () -> PriorityResult)  -> PriorityResult {
-            let validationResult = lhs.result && rhs().result
-            return PriorityResult(result: validationResult)
+        
+        let validationResult = lhs.result && rhs().result
+        let isPrioruty = lhs.isPrioruty || rhs().isPrioruty
+        return PriorityResult(isPrioruty: isPrioruty, result: validationResult)
+        
     }
     
     var isValid: Bool {

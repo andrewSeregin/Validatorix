@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     var newField: Validation.Element?
     var sliderWraper: Validation.Element?
     
-    var container: ValidationContainer?
+    var container: Validation.Container?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         let res = new.validate(using: rule)
         print(res)*/
         
-        container = ValidationContainer(delegate: self)
+        container = Validation.Container(delegate: self)
         container?.append(field)
         container?.append(newField)
         container?.append(sliderWraper)
@@ -71,17 +71,8 @@ class ViewController: UIViewController {
     }
 }
 
-struct Ff: ValidationDelegate {
-    func onValid() {
-    }
-    
-    func onInvalid(using description: ValidationResult.ErrorDescription) {
-    }
-    
-
-}
-
 extension ViewController: ValidationDelegate {
+    
     func onValid() {
         print("Valid")
     }
@@ -89,6 +80,7 @@ extension ViewController: ValidationDelegate {
     func onInvalid(using description: ValidationResult.ErrorDescription) {
         print(description)
     }
+    
 }
 
 
