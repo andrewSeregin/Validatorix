@@ -15,9 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet private(set) weak var blockTextField: UITextField!
     @IBOutlet private(set) weak var resultLabel: UILabel!
     
-    var field: WrappedElement?
-    var newField: WrappedElement?
-    var sliderWraper: WrappedElement?
+    var field: Validation.Element?
+    var newField: Validation.Element?
+    var sliderWraper: Validation.Element?
     
     var container: ValidationContainer?
         

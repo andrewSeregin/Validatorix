@@ -18,7 +18,7 @@ class ValidationContainer {
     typealias ValidHandler = () -> Void
     typealias InvalidHandler = (ErrorDescription) -> Void
     
-    private var container: [ObjectIdentifier: ValidationElement] = [:]
+    private var container: [ObjectIdentifier: Validation.Element] = [:]
     
     private var onValid: ValidHandler?
     private var onInvalid: InvalidHandler?
@@ -27,7 +27,7 @@ class ValidationContainer {
         return container.isEmpty
     }
     
-    init(container: [ObjectIdentifier: ValidationElement] = [:],
+    init(container: [ObjectIdentifier: Validation.Element] = [:],
          onValid: ValidHandler?,
          onInvalid: InvalidHandler?) {
         self.container = container
@@ -35,7 +35,7 @@ class ValidationContainer {
         self.onInvalid = onInvalid
     }
     
-    convenience init<Delegate: ValidationDelegate & AnyObject>(container:  [ObjectIdentifier: ValidationElement] = [:],
+    convenience init<Delegate: ValidationDelegate & AnyObject>(container:  [ObjectIdentifier: Validation.Element] = [:],
                                                                delegate: Delegate)  {
         
         self.init(container: container,
@@ -43,7 +43,7 @@ class ValidationContainer {
                   onInvalid: { [weak delegate] error in delegate?.onInvalid(using: error) })
     }
     
-    convenience init<Delegate: ValidationDelegate>(container: [ObjectIdentifier: ValidationElement] = [:],
+    convenience init<Delegate: ValidationDelegate>(container: [ObjectIdentifier: Validation.Element] = [:],
                                        delegate: Delegate) {
         self.init(container: container,
                   onValid: delegate.onValid,
@@ -65,14 +65,14 @@ class ValidationContainer {
         self.onInvalid = nil
     }
     
-    func append(_ wrappedElement: WrappedElement?) {
+    func append(_ wrappedElement: Validation.Element?) {
         guard let element = wrappedElement else { return }
         let identifier = ObjectIdentifier(element)
-        container[identifier] = ValidationElement(wrappedElement: element)
+        container[identifier] = element
     }
     
     
-    func remove(_ wrappedElement: WrappedElement) {
+    func remove(_ wrappedElement: Validation.Element) {
         let identifier = ObjectIdentifier(wrappedElement)
         container.removeValue(forKey: identifier)
     }
@@ -84,8 +84,8 @@ class ValidationContainer {
     func validate() {
         
         let errors = container.map { record -> PriorityResult in
-            record.value.performValidation()
-            return record.value.validationResult
+            record.value.validate()
+            return record.value.validation.validationResult
         }.filter {
             $0.isValid.not
         }

@@ -16,7 +16,7 @@ protocol ValidationValue {
     var value: Value { get }
     var isEmpty: Bool { get }
     
-    func validate<R: Rule>(by rule: R) -> Priority
+    func validate<Principle: Rule>(by rule: Principle) -> Priority
     func validate(by rules: Rules<Value>) -> Priority
 }
 
@@ -25,7 +25,7 @@ extension ValidationValue {
     var value: Self { return self }
     var isEmpty: Bool { return false }
     
-    func validate<R: Rule>(by rule: R) -> Priority  {
+    func validate<Principle: Rule>(by rule: Principle) -> Priority  {
         guard let rules = Rules(rules: [rule]) as? Rules<Value> else {
             let errorDescription = Constants.ValidationResult.Error.Reasons.mismatchedType
             return Priority(result: .invalid(errorDescription))

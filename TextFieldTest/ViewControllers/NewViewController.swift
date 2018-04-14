@@ -14,7 +14,7 @@ extension ValidationContainerAppendableMixin where Self: EventProvider & Validat
     
     func append(to container: ValidationContainer,
                 basedOn rule: AnyRule<Self.Value>,
-                for handler: @escaping WrappedElement.ValidationHandler = { _ in }) {
+                for handler: @escaping Validation.Element.ValidationHandler = { _ in }) {
         
         let wrapped = self.wrapp(by: rule, for: handler)
         container.append(wrapped)
@@ -27,11 +27,11 @@ protocol ValidationWrappableMixin {}
 extension ValidationWrappableMixin where Self: EventProvider & ValidationValue {
     
     func wrapp(by rules: AnyRule<Self.Value>,
-               for handler: @escaping WrappedElement.ValidationHandler) -> WrappedElement {
+               for handler: @escaping Validation.Element.ValidationHandler) -> Validation.Element {
         let validationCore = Validation.Validatorix(value: value, rule: rules)
-        return WrappedElement(element: self,
-                              validation: validationCore,
-                              validationHandler: handler)
+        return Validation.Element(element: self,
+                                  validation: validationCore,
+                                  validationHandler: handler)
     }
 }
 
@@ -44,10 +44,10 @@ class NewViewController: UIViewController {
     
     @IBOutlet weak var validationLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
-    var wraper: WrappedElement?
+    var wraper: Validation.Element?
     
     @IBOutlet weak var secondTextView: UITextView!
-    var secondWraper: WrappedElement?
+    var secondWraper: Validation.Element?
     
     
     let textField = UITextField(frame: .zero)
